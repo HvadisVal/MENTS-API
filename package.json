@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf ./dist && tsc",
-    "start-dev": "npx nodemon", 
+    "start-dev": "npx nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,9 +18,7 @@
     "url": "https://github.com/HvadisVal/MENTS-API/issues"
   },
   "homepage": "https://github.com/HvadisVal/MENTS-API#readme",
-
-  
-"nodemonConfig": {
+  "nodemonConfig": {
     "verbose": false,
     "watch": [
       "src"
@@ -31,20 +29,22 @@
       "node_modules"
     ]
   },
-
-
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "cross-env": "^7.0.3",
     "dotenv-flow": "^4.1.0",
     "express": "^4.21.2",
     "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.0",
     "mongoose": "^8.10.0",
     "nodemon": "^3.1.9"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/joi": "^17.2.2",
+    "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.13.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"

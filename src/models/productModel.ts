@@ -15,3 +15,20 @@ const productSchema = new Schema<Product>({
 });
 
 export const ProductModel = model<Product>('Product', productSchema);
+
+
+
+/* 
+{
+    "name": "Product #1",
+    "description": "Product 1 description",
+    "imageUrl": "https://picsum.photos/200",
+    "price": 10.99,
+    "stock": 100,
+    "discount": true,
+    "discountPct": 10,
+    "isHidden": false,
+    "_createdBy": "60f3b3b3b3b3b3b3b3b3b3b3"
+}
+
+*/
