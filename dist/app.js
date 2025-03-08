@@ -11,8 +11,8 @@ const routes_1 = __importDefault(require("./routes"));
 const app = (0, express_1.default)();
 app.use('/api', routes_1.default);
 function startServer() {
-    app.listen(4000, function () {
-        console.log('Server is running on port: ' + 4000);
+    app.listen(5000, function () {
+        console.log('Server is running on port: ' + 5000);
     });
 }
 //# sourceMappingURL=app.js.map

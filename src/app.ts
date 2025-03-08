@@ -1,30 +1,46 @@
-import express, { Application, Request, Response } from 'express';
-import dotenvFlow from 'dotenv-flow';
-import { testConnection } from './repository/database';
-
-import routes from './routes';
-import { test } from 'node:test';
+import express, { Application } from "express";
+import dotenvFlow from "dotenv-flow";
+import routes from "./routes";
+import { testConnection } from "./repository/database";
+import cors from "cors";
+import { setUpSwagger } from "./util/docs";
 
 dotenvFlow.config();
 
 // Create Express application
 const app: Application = express();
 
-
+function setupCors() {
+  app.use(
+    cors({
+      origin: "*", // Allow requests from any origin
+      methods: "GET,PUT,POST,DELETE",
+      allowedHeaders: ["auth-token", "Origin", "X-Requested-Width", "Content-Type", "Accept"],
+      credentials: true,
+    })
+  );
+}
 
 export function startServer() {
+  // Setup CORS
+  setupCors();
 
-    // json body parser
-    app.use(express.json());
+  // JSON body parser
+  app.use(express.json());
 
-    // bind routes to the app
-    app.use('/api', routes);
+  // API Routes
+  app.use("/api", routes);
 
-    // test db connection
-    testConnection(); 
+  // Swagger Docs
+  setUpSwagger(app);
 
-    const PORT: number = parseInt(process.env.PORT as string) || 4000;
-    app.listen(PORT, function () {
-        console.log('Server is running on port: ' + PORT);
-    });
+  // Test DB Connection
+  testConnection();
+
+  // Start the server
+  const PORT: number = parseInt(process.env.PORT as string) || 4000;
+  app.listen(PORT, () => {
+    console.log(`🚀 Server is running on port ${PORT}`);
+    console.log(`📄 Swagger Docs available at http://localhost:${PORT}/api/docs`);
+  });
 }
