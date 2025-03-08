@@ -1,7 +1,11 @@
-import { Application } from "express";
 import swaggerUi from "swagger-ui-express";
 import swaggerJSDoc from "swagger-jsdoc";
+import { Application } from "express";
 
+/**
+ * Setup Swagger documentation
+ * @param app
+ */
 export function setUpSwagger(app: Application) {
   const swaggerDefinition = {
     openapi: "3.0.0",
@@ -10,7 +14,12 @@ export function setUpSwagger(app: Application) {
       version: "1.0.0",
       description: "An API for uploading, voting, and battling memes.",
     },
-    servers: [{ url: "http://localhost:5001", description: "Development server" }],
+    servers: [
+      {
+        url: "http://localhost:5001",
+        description: "Development server",
+      },
+    ],
     components: {
       securitySchemes: {
         ApiKeyAuth: {
@@ -45,9 +54,10 @@ export function setUpSwagger(app: Application) {
     },
   };
 
+  // Make sure to correctly specify the path to your routes
   const options = {
     swaggerDefinition,
-    apis: ["./src/routes.ts"],
+    apis: ["./src/routes.ts", "./src/controllers/*.ts"],  // UPDATED PATH
   };
 
   const swaggerSpec = swaggerJSDoc(options);
